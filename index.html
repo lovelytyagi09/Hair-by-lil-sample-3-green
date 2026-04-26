@@ -21,13 +21,18 @@
   }
 
   html { scroll-behavior: smooth; }
-body {
+
+  body {
     font-family: 'DM Sans', sans-serif;
+    background: var(--sage);
     color: var(--text);
     overflow-x: hidden;
     min-height: 100vh;
-    background: radial-gradient(ellipse at 20% 30%, #dde5dd 0%, #B8C4B8 40%, #8fa08f 100%);
-}
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(143,160,143,0.4) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
 
   /* NAV */
   nav {
@@ -96,121 +101,49 @@ body {
     font-size: 1.5rem; cursor: pointer; color: var(--near-black);
   }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 7rem 2rem 3rem;
-    overflow: hidden;
-  }
-
-  .hero-images {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr 1fr;
-    gap: 1rem;
-    width: 100%;
-    max-width: 900px;
-    position: relative;
-    margin-bottom: -4rem;
-    z-index: 2;
-  }
-
-  .hero-img-card {
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    position: relative;
-  }
-
-  .hero-img-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .hero-img-card:nth-child(1) {
-    height: 240px;
-    align-self: flex-end;
-    transform: translateY(20px) rotate(-1.5deg);
-    mask-image: radial-gradient(ellipse 70% 75% at center, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 75% at center, black 40%, transparent 100%);
-    box-shadow: 4px 6px 20px rgba(100,110,100,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; 
+  padding: 7rem 2rem 3rem;
+  overflow: hidden;
+  background-image: url("https://images.unsplash.com/photo-1590799822755-4ec061a6b2a5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDg5fHx8ZW58MHx8fHx8");
+  background-size: cover;
+  background-position: 50% 20%;
 }
-.hero-img-card:nth-child(2) {
-    height: 340px;
-    z-index: 3;
-    transform: translateY(-10px);
-    mask-image: radial-gradient(ellipse 60% 70% at center, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 60% 70% at center, black 40%, transparent 100%);
-    box-shadow: 6px 10px 30px rgba(80,95,80,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+
+ .hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(184,196,184,0.2);
+  z-index: 1;
 }
-.hero-img-card:nth-child(3) {
-    height: 220px;
-    align-self: flex-end;
-    transform: translateY(30px) rotate(1.5deg);
-    mask-image: radial-gradient(ellipse 70% 75% at center, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 70% 75% at center, black 40%, transparent 100%);
-    box-shadow: 4px 6px 20px rgba(100,110,100,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
-}
+
+  .hero > * { position: relative; z-index: 2; }
 
   .glass-badge {
-    position: absolute;
-    bottom: 12px; left: 12px;
+    display: inline-block;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     backdrop-filter: blur(10px);
     border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: white;
-    letter-spacing: 0.05em;
-  }
-
-  .book-card {
-    position: absolute;
-    bottom: 20px; left: 20px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(14px);
-    border-radius: 12px;
-    padding: 14px 16px;
-    width: 150px;
-    z-index: 4;
-  }
-
-  .book-card p {
-    font-size: 0.72rem;
-    color: var(--near-black);
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-
-  .book-card a {
-    display: block;
-    background: var(--near-black);
-    color: white;
-    text-align: center;
-    border-radius: 50px;
-    padding: 8px 12px;
+    padding: 6px 14px;
     font-size: 0.75rem;
-    text-decoration: none;
     font-weight: 500;
-    letter-spacing: 0.03em;
-    transition: opacity 0.2s;
+    color: var(--near-black);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
   }
-
-  .book-card a:hover { opacity: 0.8; }
 
   .hero-text {
     text-align: center;
     position: relative;
     z-index: 5;
-    padding: 8rem 1rem 2rem;  /* padding-top badha diya */
+    padding: 2rem 1rem;
     max-width: 700px;
   }
 
@@ -219,7 +152,7 @@ body {
     font-size: clamp(2.8rem, 7vw, 5.5rem);
     font-weight: 700;
     line-height: 1.05;
-    color: var(--near-black);
+    color: white;
     letter-spacing: -0.02em;
   }
 
@@ -437,8 +370,8 @@ body {
   .booking-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
   .btn-primary {
-    background: var(--near-black);
-    color: white;
+    background: white;
+    color: black;
     padding: 14px 32px;
     border-radius: 50px;
     text-decoration: none;
@@ -494,44 +427,19 @@ body {
 
     .hero { padding: 6rem 1.2rem 2rem; }
 
-     .hero-images {
-        display: block;
-        position: relative;
-        height: 320px;
-        width: 100%;
-        margin: 0 auto -2rem;
+    .hero-images {
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: -2rem;
     }
 
-   .hero-img-card:nth-child(1) {
-    height: 160px;
-    width: 48%;
-    position: absolute;
-    top: 0; left: 2%;
-    z-index: 1;
-}
-
-.hero-img-card:nth-child(2) {
-    height: 180px;
-    width: 52%;
-    position: absolute;
-    top: 90px; left: 24%;
-    z-index: 2;
-}
-
-.hero-img-card:nth-child(3) {
-    height: 160px;
-    width: 48%;
-    position: absolute;
-    top: 190px; right: 2%;
-    z-index: 3;
-}
+    .hero-img-card:nth-child(1) { height: 160px; }
+    .hero-img-card:nth-child(2) { height: 240px; }
+    .hero-img-card:nth-child(3) { height: 140px; }
 
     .book-card { display: none; }
 
-
-    .book-card { display: none; }
-
-    .hero-text { padding: 5rem 0.5rem 1rem; }
+    .hero-text { padding: 3rem 0.5rem 1rem; }
 
     .about {
       grid-template-columns: 1fr;
@@ -556,12 +464,6 @@ body {
     .gallery-item:nth-child(5) {
       grid-column: auto;
       grid-row: auto;
-    }
-
-   
-    .hero-img-card img {
-        mask-image: none;
-        -webkit-mask-image: none !important;
     }
 
     .booking-btns { flex-direction: column; align-items: center; }
@@ -596,27 +498,13 @@ body {
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-images">
-    <div class="hero-img-card">
-      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=300&fit=crop&q=80" alt="Hair styling">
-      <span class="glass-badge">Ottershaw</span>
-    </div>
-    <div class="hero-img-card" style="position:relative;">
-      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&h=400&fit=crop&q=80" alt="Hair model">
-      <div class="book-card">
-        <p>Would you like to schedule an appointment?</p>
-        <a href="https://wa.me/447700000000">book online</a>
-      </div>
-    </div>
-    <div class="hero-img-card">
-      <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=400&h=300&fit=crop&q=80" alt="Balayage">
-      <span class="glass-badge">Surrey, UK</span>
-    </div>
-  </div>
-
   <div class="hero-text">
+    <span class="glass-badge">Ottershaw, Surrey · By Appointment Only</span>
     <h1>Beautiful Hair?<em>It's Personal.</em></h1>
-    <p class="hero-sub">Ottershaw, Surrey &nbsp;·&nbsp; By Appointment Only</p>
+    <div style="margin-top:2rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="https://wa.me/447700000000" class="btn-primary">Book Now</a>
+      <a href="#services" class="btn-glass">View Services</a>
+    </div>
   </div>
 </section>
 
